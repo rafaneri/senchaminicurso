@@ -54,14 +54,34 @@ Ext.define('Notas.controller.ApplicationController', {
     },
 
     onAdd: function(el, e, eOpts) {
+        this.getMain().push(this.createForm());
+    },
+    
+    createForm: function() {
+        var form,
+            record;
         this.setCurrentTitle(this.getMainTitle());
-        if (!this.grupoform) {
-            this.grupoform = Ext.create('Notas.view.GrupoForm');
+        if(this.getActiveTab() == 'grupolist') {
+            if (!this.grupoform) {
+                this.grupoform = Ext.create('Notas.view.GrupoForm');
+            }
+            this.grupoform.setTitle('Criar Grupo');
+            form = this.grupoform;
+            record = Ext.create('Notas.model.Grupo');
+        } else if(this.getActiveTab() == 'notalist') {
+            if (!this.notaform) {
+                this.notaform = Ext.create('Notas.view.NotaForm');
+            }
+            this.notaform.setTitle('Criar Nota');
+            form = this.notaform;
+            record = Ext.create('Notas.model.Nota');
         }
-        var record = Ext.create('Notas.model.Grupo');
-        this.grupoform.setRecord(record);
-        this.grupoform.setTitle('Criar Grupo');
-        this.getMain().push(this.grupoform);
+        form.setRecord(record);
+        return form;
+    },
+
+    getActiveTab: function() {
+        return this.getMain().getActiveItem().getActiveItem().xtype;
     },
     
     onSalvarGrupo: function(record) {
