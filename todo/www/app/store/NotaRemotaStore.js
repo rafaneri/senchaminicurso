@@ -5,7 +5,7 @@ Ext.define('Notas.store.NotaRemotaStore', {
     extend: 'Ext.data.Store',
     config: {
         model: 'Notas.model.Nota',
-        sorters: [{property: '_id', direction: 'DESC'}],
+        sorters: [{property: 'id', direction: 'DESC'}],
         grouper: {
             groupFn: function(record) {
                 return record.getGrupo().get('nome');
@@ -15,7 +15,7 @@ Ext.define('Notas.store.NotaRemotaStore', {
         autoLoad: true,
         proxy: {
             type: 'rest',
-            url  : 'http://192.168.25.4:3200/api/notas'
+            url  : 'http://162.243.53.75:3200/api/notas'
         }
     }
 });

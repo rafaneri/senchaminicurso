@@ -5,7 +5,7 @@ Ext.define('Notas.store.NotaLocalStore', {
     extend: 'Ext.data.Store',
     config: {
         model: 'Notas.model.Nota',
-        sorters: [{property: '_id', direction: 'DESC'}],
+        sorters: [{property: 'id', direction: 'DESC'}],
         grouper: {
             groupFn: function(record) {
                 return record.getGrupo().get('nome');

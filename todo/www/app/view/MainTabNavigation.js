@@ -32,7 +32,8 @@ Ext.define('Notas.view.MainTabNavigation', {
             },
             {
                 title: 'Notas Remotas',
-                html: 'Notas Remotas',
+                xtype: 'notalist',
+                store: 'NotaRemotaStore',
                 iconCls: 'locate',
                 cls: 'card'
             },

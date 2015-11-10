@@ -78,10 +78,7 @@ Ext.define('Notas.controller.ApplicationController', {
     onTabItemChange: function(el, value, oldValue, eOpts) {
         var text = value.tab.getTitle();
         this.setMainTitle(text);
-        
-        if(typeof value.getStore === 'function') {
-            this.setDataStore(value.getStore());
-        }
+        this.setDataStore(value.getStore());
     },
     
     getMainTitle: function() {

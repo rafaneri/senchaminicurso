@@ -11,7 +11,8 @@ Ext.application({
     requires: [],
     stores: [
         'Notas.store.GrupoStore',
-        'Notas.store.NotaLocalStore',],
+        'Notas.store.NotaLocalStore',
+        'Notas.store.NotaRemotaStore'],
     controllers: ['Notas.controller.ApplicationController'],
     views: ['Notas.view.Main'],
 
