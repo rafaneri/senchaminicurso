@@ -19,6 +19,7 @@ Ext.define('Notas.controller.ApplicationController', {
             grupoform: 'grupoform',
             grupolist: 'grupolist',
             notaform: 'notaform',
+            notalist: 'notalist',
         },
 
         control: {
@@ -39,7 +40,11 @@ Ext.define('Notas.controller.ApplicationController', {
                 exibirGrupo: 'onExibirGrupo'
             },
             notaform: {
-                salvarNota: 'onSalvarNota'
+                salvarNota: 'onSalvarNota',
+                removerNota: 'onRemoverNota'
+            },
+            notalist: {
+                exibirNota: 'onExibirNota'
             },
         }
     },
@@ -127,6 +132,23 @@ Ext.define('Notas.controller.ApplicationController', {
         this.getDataStore().sync();
         this.getMain().pop();
         this.setMainTitle(this.getCurrentTitle());
+    },
+    
+    onRemoverNota: function(record) {
+        this.getDataStore().remove(record);
+        this.getDataStore().sync();
+        this.getMain().pop();
+        this.setMainTitle(this.getCurrentTitle());
+    },
+    
+    onExibirNota: function(list, index, node, record) {
+        this.setCurrentTitle(this.getMainTitle());
+        if (!this.notaform) {
+            this.notaform = Ext.create('Notas.view.NotaForm');
+        }
+        this.notaform.setRecord(record, true);
+        this.notaform.setTitle('Editar Nota');
+        this.getMain().push(this.notaform);
     },
 
 });

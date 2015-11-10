@@ -20,8 +20,20 @@ Ext.define('Notas.view.NotaForm',{
         }
 
     },
+    doDelete: function(record) {
+        var formPanel = this.down('formpanel'),
+            record = formPanel.getRecord(),
+            me = this; // infelizmente, mantendo o contexto do escopo
+
+        Ext.Msg.confirm('', 'Deseja mesmo remover a nota?', function (btn) {
+            if (btn === 'yes') {
+                me.fireEvent('removerNota', record);
+            } 
+        }); 
+    },
     setRecord: function(record, remove) {
         this.down('formpanel').setRecord(record);
+        this.down('button[action=doDelete]').setHidden(remove == undefined || !remove);
     },
     config: {
         layout: 'fit',
@@ -29,6 +41,9 @@ Ext.define('Notas.view.NotaForm',{
         control: {
             "button[action=doSave]": {
                 tap: 'doSave'
+            },
+            "button[action=doDelete]": {
+                tap: 'doDelete'
             }
         },
         items: [{
@@ -78,7 +93,9 @@ Ext.define('Notas.view.NotaForm',{
                     xtype: 'button',
                     ui: 'decline',
                     text: 'Remover',
-                    margin: 10
+                    margin: 10,
+                    action: 'doDelete',
+                    hidden: true
                 }
             ]
         }]
