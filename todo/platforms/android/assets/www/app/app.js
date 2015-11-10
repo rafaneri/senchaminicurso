@@ -10,10 +10,10 @@ Ext.application({
     name: 'Notas',
     requires: [],
     controllers: [],
-    views: [],
+    views: ['Notas.view.Main'],
 
     launch: function() {
-        Ext.Msg.alert('FACAPE', 'Estamos prontos, vamos lá!', Ext.emptyFn);
+        var main = Ext.create('Notas.view.Main', {fullscreen: true});
     }
 
 });
