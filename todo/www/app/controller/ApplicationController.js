@@ -24,6 +24,8 @@ Ext.define('Notas.controller.ApplicationController', {
 
         control: {
             main: {
+                push: 'onMainPush',
+                pop: 'onMainPop',
                 back: 'onMainBack'
             },
             tabnavigation:{
@@ -47,6 +49,26 @@ Ext.define('Notas.controller.ApplicationController', {
                 exibirNota: 'onExibirNota'
             },
         }
+    },
+
+    onMainPush: function(view, item) {
+        var btnAdd = this.getBtnAdd();
+
+        if (btnAdd.isHidden()) {
+            return;
+        }
+
+        btnAdd.hide();
+    },
+
+    onMainPop: function(view, item) {
+        var btnAdd = this.getBtnAdd();
+
+        if (!btnAdd.isHidden()) {
+            return;
+        }
+
+        btnAdd.show();
     },
 
     onMainBack: function(view, item) {
