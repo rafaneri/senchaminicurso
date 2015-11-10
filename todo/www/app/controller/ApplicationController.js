@@ -7,7 +7,8 @@ Ext.define('Notas.controller.ApplicationController', {
         refs: {
             main: 'mainview',
             btnAdd: '#btnAdd',
-            grupoform: 'grupoform'
+            grupoform: 'grupoform',
+            grupolist: 'grupolist',
         },
 
         control: {
@@ -15,8 +16,12 @@ Ext.define('Notas.controller.ApplicationController', {
                 tap: 'onAdd'
             },
             grupoform: {
-                salvarGrupo: 'onSalvarGrupo'
-            }
+                salvarGrupo: 'onSalvarGrupo',
+                removerGrupo: 'onRemoverGrupo'
+            },
+            grupolist: {
+                exibirGrupo: 'onExibirGrupo'
+            },
         }
     },
 
@@ -34,6 +39,21 @@ Ext.define('Notas.controller.ApplicationController', {
         var store = Ext.data.StoreManager.lookup('GrupoStore');
         store.add(record);
         this.getMain().pop();
+    },
+    
+    onRemoverGrupo: function(record) {
+        var store = Ext.data.StoreManager.lookup('GrupoStore');
+        store.remove(record);
+        this.getMain().pop();
+    },
+    
+    onExibirGrupo: function(list, index, node, record) {
+        if (!this.grupoform) {
+            this.grupoform = Ext.create('Notas.view.GrupoForm');
+        }
+        this.grupoform.setRecord(record, true);
+        this.grupoform.setTitle('Editar Grupo');
+        this.getMain().push(this.grupoform);
     },
 
 });
