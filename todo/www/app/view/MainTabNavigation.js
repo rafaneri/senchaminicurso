@@ -4,6 +4,7 @@
 Ext.define('Notas.view.MainTabNavigation', {
     extend: 'Ext.tab.Panel',
     xtype: "maintabnavigation",
+    requires: ['Notas.view.GrupoList'],
     doActiveItemChange: function(el, value, oldValue, eOpts) {
                 
         this.fireEvent('tabItemChange', el, value, oldValue, eOpts);
@@ -36,7 +37,8 @@ Ext.define('Notas.view.MainTabNavigation', {
             },
             {
                 title: 'Grupos',
-                html: 'Grupos',
+                xtype: 'grupolist',
+                store: 'GrupoStore',
                 iconCls: 'settings',
                 cls: 'card'
             }
