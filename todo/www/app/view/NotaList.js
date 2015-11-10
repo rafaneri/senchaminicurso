@@ -18,6 +18,12 @@ Ext.define('Notas.view.NotaList',{
     },
     config: {
         allowDeselect: true,
+        plugins: [
+            { 
+                xclass: 'Ext.plugin.PullRefresh',
+                pullText: 'Puxe para atualizar as notas'
+            }
+        ],
         itemTpl: [
             '<div class="notas">{titulo}</div>'
         ].join(''),
