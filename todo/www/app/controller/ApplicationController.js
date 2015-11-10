@@ -3,15 +3,22 @@
 */
 Ext.define('Notas.controller.ApplicationController', {
     extend: 'Ext.app.Controller',
+    launch: function(){
+        // configurado default para notas locais
+        this.setDataStore(Ext.data.StoreManager.lookup('NotaLocalStore'));
+    },
     config: { 
         // mantém o titulo da view antes de sair para o form
         currentTitle: '',
+        // mantém o data store a ser utilizado para nota
+        dataStore: null, 
         refs: {
             main: 'mainview',
             tabnavigation: 'maintabnavigation',
             btnAdd: '#btnAdd',
             grupoform: 'grupoform',
             grupolist: 'grupolist',
+            notaform: 'notaform',
         },
 
         control: {
@@ -31,6 +38,9 @@ Ext.define('Notas.controller.ApplicationController', {
             grupolist: {
                 exibirGrupo: 'onExibirGrupo'
             },
+            notaform: {
+                salvarNota: 'onSalvarNota'
+            },
         }
     },
 
@@ -41,6 +51,10 @@ Ext.define('Notas.controller.ApplicationController', {
     onTabItemChange: function(el, value, oldValue, eOpts) {
         var text = value.tab.getTitle();
         this.setMainTitle(text);
+        
+        if(typeof value.getStore === 'function') {
+            this.setDataStore(value.getStore());
+        }
     },
     
     getMainTitle: function() {
@@ -106,6 +120,13 @@ Ext.define('Notas.controller.ApplicationController', {
         this.grupoform.setRecord(record, true);
         this.grupoform.setTitle('Editar Grupo');
         this.getMain().push(this.grupoform);
+    },
+    
+    onSalvarNota: function(record) {
+        this.getDataStore().add(record);
+        this.getDataStore().sync();
+        this.getMain().pop();
+        this.setMainTitle(this.getCurrentTitle());
     },
 
 });
