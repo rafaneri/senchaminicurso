@@ -4,6 +4,7 @@
 Ext.define('Notas.view.Main', {
     extend: 'Ext.navigation.View',
     xtype: "mainview",
+    requires: ['Notas.view.MainTabNavigation'],
     config: {
         autoDestroy: false,
         fullscreen: true,
@@ -23,6 +24,10 @@ Ext.define('Notas.view.Main', {
                     align:'right'
                 }
             ]
-        }
+        },
+        items: [{
+            title: 'Notas Locais',
+            xtype: 'maintabnavigation'
+        }]
     }
 });
