@@ -9,7 +9,7 @@ Ext.application({
 
     name: 'Notas',
     requires: [],
-    controllers: [],
+    controllers: ['Notas.controller.ApplicationController'],
     views: ['Notas.view.Main'],
 
     launch: function() {
