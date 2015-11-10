@@ -81,7 +81,7 @@ Ext.define('Notas.controller.ApplicationController', {
     onExibirGrupo: function(list, index, node, record) {
         this.setCurrentTitle(this.getMainTitle());
         if (!this.grupoform) {
-            this.grupoform = Ext.create('Notas.view.GrupoForm');
+            this.grupoform = Ext.create('NotasErbase.view.GrupoForm');
         }
         this.grupoform.setRecord(record, true);
         this.grupoform.setTitle('Editar Grupo');
